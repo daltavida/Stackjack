@@ -1,10 +1,10 @@
 "use strict";
 
 // Global variables
-let score1 = 0;
-let score2 = 0;
+const scores = [0, 0];
 
 let currentScore = 0;
+let activePlayer = 0;
 
 // Select elements
 const score0El = document.getElementById("score--0");
@@ -26,11 +26,14 @@ btnRoll.addEventListener("click", function () {
   const dice = Math.trunc(Math.random() * 6) + 1;
   diceEl.src = `dice-${dice}.png`;
   diceEl.classList.remove("hidden");
-  console.log(dice);
 
   if (dice !== 1) {
     currentScore += dice;
-    current0El.textContent = currentScore;
+    document.getElementById(`current--${activePlayer}`).textContent =
+      currentScore;
   } else {
+    currentScore = 0;
+    document.getElementById(`current--${activePlayer}`).textContent = 0;
+    activePlayer = activePlayer === 0 ? 1 : 0;
   }
 });
